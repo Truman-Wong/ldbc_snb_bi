@@ -123,7 +123,7 @@ def run_precompute(args):
     t0 = time.time()
     print(f"==================== Precompute for BI 19,4,6,20 ======================")
     # compute values and print to files
-    for q in [19,4,6,20]:
+    for q in [4,6,20]:
         t1 = time.time()
         requests.get(f'{args.endpoint}/query/ldbc_snb/precompute_bi{q}', headers=HEADERS)
         print(f'precompute_bi{q}:\t\t{time.time()-t1:.4f} s')
@@ -153,7 +153,7 @@ if __name__ == '__main__':
     results_file = open(output/'results.csv', 'w')
     timings_file = open(output/'timings.csv', 'w')
     timings_file.write(f"tool|sf|day|q|parameters|time\n")
-    query_variants = ["1", "2a", "2b", "3", "4", "5", "6", "7", "8a", "8b", "9", "10a", "10b", "11", "12", "13", "14a", "14b", "15a", "15b", "16a", "16b", "17", "18", "19a", "19b", "20"]
+    query_variants = ["1", "2a", "2b", "3", "4", "5", "6", "7", "8a", "8b", "9", "10a", "10b", "11", "12", "13", "14a", "14b", "15a", "15b", "16a", "16b", "17", "18", "20"]
     if not args.skip: run_precompute(args)
     run_queries(query_variants, results_file, timings_file, 'None', args)
     results_file.close()

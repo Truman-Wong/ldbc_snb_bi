@@ -77,7 +77,7 @@ done
 
 gsql --graph ldbc_snb $DML_PATH/precompute-bi4.gsql
 gsql --graph ldbc_snb $DML_PATH/precompute-bi6.gsql
-gsql --graph ldbc_snb $DML_PATH/precompute-bi19.gsql
+#gsql --graph ldbc_snb $DML_PATH/precompute-bi19.gsql
 gsql --graph ldbc_snb $DML_PATH/precompute-bi20.gsql
 gsql --graph ldbc_snb $DML_PATH/precompute-root-post.gsql
 
