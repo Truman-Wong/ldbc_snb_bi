@@ -1,0 +1,77 @@
+===============================================================================
+Setting up the TigerGraph database
+-------------------------------------------------------------------------------
+DDL_PATH: /home/tigergraph/ldbc_snb_bi/tigergraph/ddl
+DATA_PATH: /home/tigergraph/sf1
+QUERY_PATH: /home/tigergraph/ldbc_snb_bi/tigergraph/queries
+QUERY_PATH: /home/tigergraph/ldbc_snb_bi/tigergraph/dml
+===============================================================================
+PUT TokenBank successfully.
+PUT ExprFunctions successfully.
+Successfully created vertex types: [Comment1].
+Successfully created vertex types: [Comment2].
+Successfully created vertex types: [Comment3].
+Successfully created vertex types: [Post1].
+Successfully created vertex types: [Post2].
+Successfully created vertex types: [Post3].
+Successfully created vertex types: [Company].
+Successfully created vertex types: [University].
+Successfully created vertex types: [City].
+Successfully created vertex types: [Country].
+Successfully created vertex types: [Continent].
+Successfully created vertex types: [Forum1].
+Successfully created vertex types: [Forum2].
+Successfully created vertex types: [Forum3].
+Successfully created vertex types: [Person1].
+Successfully created vertex types: [Person2].
+Successfully created vertex types: [Person3].
+Successfully created vertex types: [Tag].
+Successfully created vertex types: [TagClass].
+Successfully created edge types: [CONTAINER_OF].
+Successfully created reverse edge types: [CONTAINER_OF_REVERSE].
+Successfully created edge types: [HAS_CREATOR].
+Successfully created reverse edge types: [HAS_CREATOR_REVERSE].
+Successfully created edge types: [HAS_INTEREST].
+Successfully created reverse edge types: [HAS_INTEREST_REVERSE].
+Successfully created edge types: [HAS_MEMBER].
+Successfully created reverse edge types: [HAS_MEMBER_REVERSE].
+Successfully created edge types: [HAS_MODERATOR].
+Successfully created reverse edge types: [HAS_MODERATOR_REVERSE].
+Successfully created edge types: [HAS_TAG].
+Successfully created reverse edge types: [HAS_TAG_REVERSE].
+Successfully created edge types: [HAS_TYPE].
+Successfully created reverse edge types: [HAS_TYPE_REVERSE].
+Successfully created edge types: [IS_LOCATED_IN].
+Successfully created reverse edge types: [IS_LOCATED_IN_REVERSE].
+Successfully created edge types: [MESG_LOCATED_IN].
+Successfully created edge types: [IS_PART_OF].
+Successfully created reverse edge types: [IS_PART_OF_REVERSE].
+Successfully created edge types: [IS_SUBCLASS_OF].
+Successfully created reverse edge types: [IS_SUBCLASS_OF_REVERSE].
+Successfully created edge types: [KNOWS].
+Successfully created edge types: [LIKES].
+Successfully created reverse edge types: [LIKES_REVERSE].
+Successfully created edge types: [REPLY_OF].
+Successfully created reverse edge types: [REPLY_OF_REVERSE].
+Successfully created edge types: [STUDY_AT].
+Successfully created reverse edge types: [STUDY_AT_REVERSE].
+Successfully created edge types: [WORK_AT].
+Successfully created reverse edge types: [WORK_AT_REVERSE].
+Successfully created edge types: [ROOT_POST].
+Successfully created reverse edge types: [ROOT_POST_REVERSE].
+Successfully created edge types: [REPLY_COUNT].
+Successfully created global schema change jobs: [addIndex].
+Kick off global schema change job addIndex
+Doing schema change on the global schema (current version: 0)
+Trying to add index 'country_name' on the attribute 'name' of global vertex 'Country'.
+Trying to add index 'company_name' on the attribute 'name' of global vertex 'Company'.
+Trying to add index 'university_name' on the attribute 'name' of global vertex 'University'.
+Trying to add index 'tag_name' on the attribute 'name' of global vertex 'Tag'.
+Trying to add index 'tagclass_name' on the attribute 'name' of global vertex 'TagClass'.
+
+The global schema change job addIndex completes in 0.192 seconds!
+Global schema change succeeded.
+Stopping GPE GSE RESTPP
+Successfully stopped GPE GSE RESTPP in 0.069 seconds
+Starting GPE GSE RESTPP
+Successfully started GPE GSE RESTPP in 0.082 seconds

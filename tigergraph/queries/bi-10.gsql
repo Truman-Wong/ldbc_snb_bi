@@ -1,10 +1,10 @@
-CREATE OR REPLACE DISTRIBUTED QUERY bi10(VERTEX<Person> personId, STRING country, STRING tagClass) SYNTAX v2 {
+CREATE OR REPLACE DISTRIBUTED QUERY bi10(VERTEX<Person1> personId, STRING country, STRING tagClass) SYNTAX v2 {
   TYPEDEF TUPLE <UINT personId, STRING tagName, UINT messageCount> RESULT;
   OrAccum @visited, @selected;
   SetAccum<VERTEX<Tag>> @tags;
   MapAccum<VERTEX<Tag>, SumAccum<UINT>> @messageCount;
   HeapAccum<RESULT> (100, messageCount DESC, tagName ASC, personId ASC) @@result;
-  candidates = SELECT p FROM Country:cn -(<IS_PART_OF.<IS_LOCATED_IN)- Person:p
+  candidates = SELECT p FROM Country:cn -(<IS_PART_OF.<IS_LOCATED_IN)- Person1|Person2|Person3:p
     WHERE cn.name == country;
 
   S = {personId};
@@ -13,23 +13,23 @@ CREATE OR REPLACE DISTRIBUTED QUERY bi10(VERTEX<Person> personId, STRING country
   WHILE pathLength < 3 DO
     S =
       SELECT t
-      FROM S:s -(KNOWS)- Person:t
+      FROM S:s -(KNOWS)- Person1|Person2|Person3:t
       WHERE NOT t.@visited
       POST-ACCUM t.@visited = TRUE;
     pathLength += 1;
   END;
-  # Here, S is the Person with shortest length of 3
+  # Here, S is the Person1|Person2|Person3 with shortest length of 3
   persons = SELECT t
-    FROM S:s -(KNOWS)- Person:t
+    FROM S:s -(KNOWS)- Person1|Person2|Person3:t
     WHERE NOT t.@visited;
   persons = (persons UNION S) INTERSECT candidates;
 
   messages = SELECT m
-    FROM persons:p -(<HAS_CREATOR)- (Comment|Post):m
+    FROM persons:p -(<HAS_CREATOR)- (Comment1|Comment2|Comment3|Post1|Post2|Post3):m
     ACCUM m.@selected += TRUE;
 
   messages = SELECT m
-    FROM TagClass:tc -(<HAS_TYPE)- Tag:t -(<HAS_TAG)- (Comment|Post):m
+    FROM TagClass:tc -(<HAS_TYPE)- Tag:t -(<HAS_TAG)- (Comment1|Comment2|Comment3|Post1|Post2|Post3):m
     WHERE tc.name == tagClass AND m.@selected;
 
   messages = SELECT m
@@ -37,7 +37,7 @@ CREATE OR REPLACE DISTRIBUTED QUERY bi10(VERTEX<Person> personId, STRING country
     ACCUM m.@tags += t;
 
   persons = SELECT p
-    FROM messages:m -(HAS_CREATOR>)- Person:p
+    FROM messages:m -(HAS_CREATOR>)- Person1|Person2|Person3:p
     ACCUM
       FOREACH t IN m.@tags DO
         p.@messageCount += (t -> 1)

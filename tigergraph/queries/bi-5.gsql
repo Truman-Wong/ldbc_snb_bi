@@ -10,12 +10,12 @@ CREATE OR REPLACE DISTRIBUTED QUERY bi5(STRING tag) SYNTAX v2 {
 
   T = SELECT t FROM Tag:t WHERE t.name == tag;
 
-  messages = SELECT m FROM T:t -(<HAS_TAG)- (Comment|Post):m;
-  tmp = SELECT m FROM messages:m -(<LIKES)- Person:p ACCUM m.@likeCount += 1;
-  tmp = SELECT m FROM messages:m -(<REPLY_OF)- Comment:c ACCUM m.@replyCount += 1;
+  messages = SELECT m FROM T:t -(<HAS_TAG)- (Comment1|Comment2|Comment3|Post1|Post2|Post3):m;
+  tmp = SELECT m FROM messages:m -(<LIKES)- Person1|Person2|Person3:p ACCUM m.@likeCount += 1;
+  tmp = SELECT m FROM messages:m -(<REPLY_OF)- Comment1|Comment2|Comment3:c ACCUM m.@replyCount += 1;
   tmp =
     SELECT p
-    FROM messages:m -(HAS_CREATOR>)- Person:p
+    FROM messages:m -(HAS_CREATOR>)- Person1|Person2|Person3:p
     ACCUM
       p.@replyCount += m.@replyCount,
       p.@likeCount += m.@likeCount,

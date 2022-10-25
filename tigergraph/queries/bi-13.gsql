@@ -10,12 +10,12 @@ CREATE OR REPLACE DISTRIBUTED QUERY bi13(STRING country, DATETIME endDate) SYNTA
 
   zombieCandidates =
     SELECT p
-    FROM Country:cn -(<IS_PART_OF.<IS_LOCATED_IN)- Person:p
+    FROM Country:cn -(<IS_PART_OF.<IS_LOCATED_IN)- Person1|Person2|Person3:p
     WHERE cn.name == country AND p.creationDate < endEpoch;
 
   tmp =
     SELECT p
-    FROM zombieCandidates:p -(<HAS_CREATOR)- (Comment|Post):m
+    FROM zombieCandidates:p -(<HAS_CREATOR)- (Comment1|Comment2|Comment3|Post1|Post2|Post3):m
     WHERE m.creationDate < endEpoch
     ACCUM p.@messageCount += 1;
 
@@ -26,15 +26,15 @@ CREATE OR REPLACE DISTRIBUTED QUERY bi13(STRING country, DATETIME endDate) SYNTA
         (month(endDate) - month(epoch_to_datetime(p.creationDate/1000))) + 1
     ACCUM p.@selected += true;
 
-  M = SELECT m FROM zombies:z -(<HAS_CREATOR)- (Comment|Post):m;
-  tmp = SELECT p FROM M:m -(<LIKES)- Person:p
+  M = SELECT m FROM zombies:z -(<HAS_CREATOR)- (Comment1|Comment2|Comment3|Post1|Post2|Post3):m;
+  tmp = SELECT p FROM M:m -(<LIKES)- Person1|Person2|Person3:p
     WHERE p.creationDate < endEpoch
     ACCUM
       m.@totalLikeCount += 1,
       IF p.@selected THEN
         m.@zombieLikeCount += 1
       END;
-  tmp = SELECT m FROM M:m -(HAS_CREATOR>)- Person:p 
+  tmp = SELECT m FROM M:m -(HAS_CREATOR>)- Person1|Person2|Person3:p 
     ACCUM p.@totalLikeCount += m.@totalLikeCount, p.@zombieLikeCount += m.@zombieLikeCount;
   
   zombies =

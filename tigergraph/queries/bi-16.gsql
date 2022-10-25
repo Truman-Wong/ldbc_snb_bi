@@ -13,7 +13,7 @@ CREATE OR REPLACE DISTRIBUTED QUERY bi16(STRING tagA, DATETIME dateA,
 
   personsA =
     SELECT p
-    FROM Tag:t -(<HAS_TAG)- (Comment|Post):m -(HAS_CREATOR>)- Person:p
+    FROM Tag:t -(<HAS_TAG)- (Comment1|Comment2|Comment3|Post1|Post2|Post3):m -(HAS_CREATOR>)- Person1|Person2|Person3:p
     WHERE
       t.name == tagA AND
       year(epoch_to_datetime(m.creationDate/1000)) == yearA AND
@@ -28,7 +28,7 @@ CREATE OR REPLACE DISTRIBUTED QUERY bi16(STRING tagA, DATETIME dateA,
 
   personsB =
     SELECT p
-    FROM Tag:t -(<HAS_TAG)- (Comment|Post):m -(HAS_CREATOR>)- Person:p
+    FROM Tag:t -(<HAS_TAG)- (Comment1|Comment2|Comment3|Post1|Post2|Post3):m -(HAS_CREATOR>)- Person1|Person2|Person3:p
     WHERE
       t.name == tagB AND
       year(epoch_to_datetime(m.creationDate/1000)) == yearB AND

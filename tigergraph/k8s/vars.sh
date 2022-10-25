@@ -8,7 +8,7 @@ export TG_ENDPOINT=http://127.0.0.1:${TG_REST_PORT}
 
 # SF-100 benchmark
 export NUM_NODES=2 # number of pods or nodes
-export SF=100 # data source 100, 1000, 3000, 10000 ...
+export SF=1 # data source 100, 1000, 3000, 10000 ...
 export DOWNLOAD_THREAD=5 # number of download threads
 
 export TG_DATA_DIR=$HOME/sf${SF}
