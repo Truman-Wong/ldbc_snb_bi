@@ -37,8 +37,8 @@ CREATE DIRECTED EDGE HAS_MEMBER (FROM Forum1|Forum2|Forum3, TO Person1|Person2|P
 CREATE DIRECTED EDGE HAS_MODERATOR (FROM Forum1|Forum2|Forum3, TO Person1|Person2|Person3) WITH REVERSE_EDGE="HAS_MODERATOR_REVERSE"
 CREATE DIRECTED EDGE HAS_TAG (FROM Comment1|Comment2|Comment3|Post1|Post2|Post3|Forum1|Forum2|Forum3, TO Tag) WITH REVERSE_EDGE="HAS_TAG_REVERSE"
 CREATE DIRECTED EDGE HAS_TYPE (FROM Tag, TO TagClass) WITH REVERSE_EDGE="HAS_TYPE_REVERSE"
-CREATE DIRECTED EDGE IS_LOCATED_IN (FROM Company, TO Country | FROM Person1|Person2|Person3, TO City | FROM University, TO City) WITH REVERSE_EDGE="IS_LOCATED_IN_REVERSE"
-CREATE DIRECTED EDGE MESG_LOCATED_IN (FROM Comment1|Comment2|Comment3, TO Country | FROM Post1|Post2|Post3, TO Country) // Reverse edge of Comment1|Comment2|Comment3/Post1|Post2|Post3 -IS_Located_IN-> Country will cause Country connected by too many edges, which makes loading slow
+CREATE DIRECTED EDGE IS_LOCATED_IN (FROM Company, TO Country | FROM Person1, TO City | FROM Person2, TO City | FROM Person3, TO City | FROM University, TO City) WITH REVERSE_EDGE="IS_LOCATED_IN_REVERSE"
+CREATE DIRECTED EDGE MESG_LOCATED_IN (FROM Comment1|Comment2|Comment3|Post1|Post2|Post3, TO Country) // Reverse edge of Comment1|Comment2|Comment3/Post1|Post2|Post3 -IS_Located_IN-> Country will cause Country connected by too many edges, which makes loading slow
 CREATE DIRECTED EDGE IS_PART_OF (FROM City, TO Country | FROM Country, TO Continent) WITH REVERSE_EDGE="IS_PART_OF_REVERSE"
 CREATE DIRECTED EDGE IS_SUBCLASS_OF (FROM TagClass, TO TagClass) WITH REVERSE_EDGE="IS_SUBCLASS_OF_REVERSE"
 CREATE UNDIRECTED EDGE KNOWS (FROM Person1|Person2|Person3, TO Person1|Person2|Person3, creationDate INT, weight19 UINT, weight20 UINT DEFAULT 10000)
