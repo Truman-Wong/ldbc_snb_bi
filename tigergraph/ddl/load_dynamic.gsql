@@ -52,9 +52,9 @@ CREATE LOADING JOB load_dynamic FOR GRAPH ldbc_snb {
     TO EDGE HAS_CREATOR VALUES ($1 Comment2, $2 Person2), 
     TO EDGE HAS_CREATOR VALUES ($1 Comment3, $2 Person3) USING header="true", separator="|";
   LOAD file_Post_hasCreator_Person
-    TO EDGE HAS_CREATOR VALUES ($1 Post1 $2 Person1) ,
-    TO EDGE HAS_CREATOR VALUES ($1 Post2 $2 Person2) ,
-    TO EDGE HAS_CREATOR VALUES ($1 Post3 $2 Person3) USING header="true", separator="|";
+    TO EDGE HAS_CREATOR VALUES ($1 Post1, $2 Person1) ,
+    TO EDGE HAS_CREATOR VALUES ($1 Post2, $2 Person2) ,
+    TO EDGE HAS_CREATOR VALUES ($1 Post3, $2 Person3) USING header="true", separator="|";
   LOAD file_Person_hasInterest_Tag
     TO EDGE HAS_INTEREST VALUES ($1 Person1, $2) ,
     TO EDGE HAS_INTEREST VALUES ($1 Person2, $2) ,

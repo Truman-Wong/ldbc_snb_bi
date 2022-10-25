@@ -21,3 +21,4 @@ CREATE LOADING JOB insert_vertex FOR GRAPH ldbc_snb {
     TO VERTEX Person1 VALUES ($1, $2, $3, $4, ToMiliSeconds($5), ToMiliSeconds($0), $6, $7, SPLIT($8,";"), SPLIT($9,";"), _) ,
     TO VERTEX Person2 VALUES ($1, $2, $3, $4, ToMiliSeconds($5), ToMiliSeconds($0), $6, $7, SPLIT($8,";"), SPLIT($9,";"), _) ,
     TO VERTEX Person3 VALUES ($1, $2, $3, $4, ToMiliSeconds($5), ToMiliSeconds($0), $6, $7, SPLIT($8,";"), SPLIT($9,";"), _) USING header="true", separator="|";
+}
