@@ -1,9 +1,9 @@
 CREATE OR REPLACE DISTRIBUTED QUERY precompute_root_post() SYNTAX v2 {
   MinAccum<UINT> @postId;
   FILE file1 ("/home/tigergraph/root_post.csv"); // a temporaty file to store the root post ids
-  M = SELECT t FROM Post1|Post2|Post3:s -(<REPLY_OF)- Comment1|Comment2|Comment3:t ACCUM t.@postId += s.id;
+  M = SELECT t FROM (Post1|Post2|Post3):s -(<REPLY_OF)- (Comment1|Comment2|Comment3):t ACCUM t.@postId += s.id;
   WHILE M.size() > 0 DO
-    M = SELECT t FROM M:s -(<REPLY_OF)- Comment:t
+    M = SELECT t FROM M:s -(<REPLY_OF)- (Comment1|Comment2|Comment3):t
     ACCUM t.@postId += s.@postId,
       file1.println(t.id, s.@postId);
   END;

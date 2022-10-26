@@ -6,16 +6,16 @@ CREATE OR REPLACE DISTRIBUTED QUERY bi4 (DATETIME date) SYNTAX v2 {
   SumAccum<UINT> @messageCount;
   INT epoch = datetime_to_epoch(date) * 1000;
   
-  popularForums = SELECT f FROM Forum1|Forum2|Forum3:f
+  popularForums = SELECT f FROM (Forum1|Forum2|Forum3):f
     WHERE f.creationDate > epoch
     ORDER BY f.maxMember DESC, f.id ASC
     LIMIT 100;
 
-  P = SELECT p FROM popularForums -(HAS_MEMBER>)- Person1|Person2|Person3:p ACCUM p.@inForum += true;
-  posts = SELECT p FROM popularForums -(CONTAINER_OF>)- Post1|Post2|Post3:p;
-  comments = SELECT m FROM posts -(<ROOT_POST)- Comment1|Comment2|Comment3:m;
+  P = SELECT p FROM popularForums -(HAS_MEMBER>)- (Person1|Person2|Person3):p ACCUM p.@inForum += true;
+  posts = SELECT p FROM popularForums -(CONTAINER_OF>)- (Post1|Post2|Post3):p;
+  comments = SELECT m FROM posts -(<ROOT_POST)- (Comment1|Comment2|Comment3):m;
   M = posts UNION comments;
-  tmp = SELECT p FROM M-(HAS_CREATOR>)- Person1|Person2|Person3:p 
+  tmp = SELECT p FROM M-(HAS_CREATOR>)- (Person1|Person2|Person3):p 
     WHERE p.@inForum 
     ACCUM p.@messageCount += 1
     ORDER BY p.@messageCount DESC, p.id ASC 

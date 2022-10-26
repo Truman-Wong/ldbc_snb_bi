@@ -8,17 +8,17 @@ CREATE OR REPLACE DISTRIBUTED QUERY bi19(VERTEX<City> city1Id, VERTEX<City> city
   SumAccum<UINT> @creatorId; 
   OrAccum @next, @isTarget;
   MinAccum<UINT> @@threshold;
-  P = {Person1|Person2|Person3.*};
+  P = {Person1.*,Person2.*,Person3.*};
   @@threshold += P.size() * 40;
 
   city1 = {city1Id};
   city2 = {city2Id};
-  S = SELECT p FROM city1:c -(<IS_LOCATED_IN)- Person1|Person2|Person3:p ACCUM p.@dist1 += (p.id->0);
-  S2 = SELECT p FROM city2:c -(<IS_LOCATED_IN)- Person1|Person2|Person3:p ACCUM p.@isTarget += True;
+  S = SELECT p FROM city1:c -(<IS_LOCATED_IN)- (Person1|Person2|Person3):p ACCUM p.@dist1 += (p.id->0);
+  S2 = SELECT p FROM city2:c -(<IS_LOCATED_IN)- (Person1|Person2|Person3):p ACCUM p.@isTarget += True;
   
   WHILE S.size()>0 DO
     # Expand the know map, we also neglect the distances larger than threshold
-    S = SELECT t FROM S:s-(KNOWS:e)-Person1|Person2|Person3:t
+    S = SELECT t FROM S:s-(KNOWS:e)- (Person1|Person2|Person3):t
       WHERE e.weight19 > 0
       ACCUM
         FOREACH (p,dis) IN s.@dist1 DO

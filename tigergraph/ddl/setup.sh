@@ -72,7 +72,7 @@ echo "Install Query"
 echo "-------------------------------------------------------------------------------"
 t2=$SECONDS
 
-for i in $(seq 1 20); do
+for i in $(seq 1 10); do
   gsql --graph ldbc_snb $QUERY_PATH/bi-${i}.gsql
 done
 

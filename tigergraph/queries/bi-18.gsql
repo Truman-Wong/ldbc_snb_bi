@@ -6,18 +6,18 @@ CREATE OR REPLACE DISTRIBUTED QUERY bi18(STRING tag) SYNTAX v2 {
   OrAccum<BOOL> @hasInterest;
   person1 =
     SELECT p
-    FROM Tag:t -(<HAS_INTEREST)- Person1|Person2|Person3:p
+    FROM Tag:t -(<HAS_INTEREST)- (Person1|Person2|Person3):p
     WHERE t.name == tag
     ACCUM p.@hasInterest += TRUE, p.@exclude += p;
   tmp =
     SELECT p2
-    FROM person1:p1 -(KNOWS)- Person1|Person2|Person3:p2
+    FROM person1:p1 -(KNOWS)- (Person1|Person2|Person3):p2
     WHERE p2.@hasInterest
     ACCUM p2.@exclude += p1;
 
   person2 =
     SELECT p2
-    FROM person1:p1 -(KNOWS)- Person1|Person2|Person3 -(KNOWS)- Person1|Person2|Person3:p2
+    FROM person1:p1 -(KNOWS)- (Person1|Person2|Person3) -(KNOWS)- (Person1|Person2|Person3):p2
     WHERE p2.@hasInterest AND NOT p2.@exclude.contains(p1)
     ACCUM p2.@mutualFriendCount += (p1 -> 1)
     POST-ACCUM 

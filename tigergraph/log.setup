@@ -69,9 +69,28 @@ Trying to add index 'university_name' on the attribute 'name' of global vertex '
 Trying to add index 'tag_name' on the attribute 'name' of global vertex 'Tag'.
 Trying to add index 'tagclass_name' on the attribute 'name' of global vertex 'TagClass'.
 
-The global schema change job addIndex completes in 0.192 seconds!
+The global schema change job addIndex completes in 0.218 seconds!
 Global schema change succeeded.
 Stopping GPE GSE RESTPP
-Successfully stopped GPE GSE RESTPP in 0.069 seconds
+Successfully stopped GPE GSE RESTPP in 0.056 seconds
 Starting GPE GSE RESTPP
-Successfully started GPE GSE RESTPP in 0.082 seconds
+Successfully started GPE GSE RESTPP in 0.078 seconds
+The graph ldbc_snb is created.
+Successfully created loading jobs: [load_static].
+Successfully created loading jobs: [load_dynamic].
+Successfully created loading jobs: [insert_vertex].
+Successfully created loading jobs: [insert_edge].
+Successfully created loading jobs: [delete_edge].
+Successfully created loading jobs: [load_root_post].
+Successfully created loading jobs: [load_precompute].
+===============================================================================
+Load Data
+-------------------------------------------------------------------------------
+[Tip: Use "CTRL + C" to stop displaying the loading status update, then use "SHOW LOADING STATUS jobid" to track the loading progress again]
+[Tip: Manage loading jobs with "ABORT/RESUME LOADING JOB jobid"]
+Starting the following job, i.e.
+  JobName: load_static, jobid: ldbc_snb.load_static.file.m1.1666764920972
+  Loading log: '/home/tigergraph/tigergraph/log/restpp/restpp_loader_logs/ldbc_snb/ldbc_snb.load_static.file.m1.1666764920972.log'
+
+Job "ldbc_snb.load_static.file.m1.1666764920972" loading status
+[WAITING] m1 ( Finished: 0 / Total: 0 )
