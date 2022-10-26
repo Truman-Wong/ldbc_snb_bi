@@ -26,6 +26,7 @@ def run_query(name, parameters, endpoint):
     HEADERS = {'GSQL-TIMEOUT': '36000000'}
     start = time.time()
     response = requests.get(f'{endpoint}/query/ldbc_snb/{name}', headers=HEADERS, params=parameters).json()
+    print(response)
     end = time.time()
     duration = end - start
     return response['results'][0]['result'], duration
