@@ -26,7 +26,6 @@ def run_query(name, parameters, endpoint):
     HEADERS = {'GSQL-TIMEOUT': '36000000'}
     start = time.time()
     response = requests.get(f'{endpoint}/query/ldbc_snb/{name}', headers=HEADERS, params=parameters).json()
-    print(response)
     end = time.time()
     duration = end - start
     return response['results'][0]['result'], duration
@@ -39,7 +38,7 @@ def load(job, data_dir, names, batch_dir, args):
 
 """
 Load data using restpp endpoints
-""" 
+"""
 def load_by_restpp(job, data_dir, names, batch_dir, endpoint):
     for name in names:
         print(f'{name}:')
@@ -57,9 +56,9 @@ def load_by_restpp(job, data_dir, names, batch_dir, endpoint):
             print(f'> {nlines} changes')
 
 """
-Load data using gsql command 
+Load data using gsql command
 for concurrent insert/deletes on K8S cluster
-""" 
+"""
 def load_by_gsql(job, data_dir, names, batch_dir):
     gsql = f'RUN LOADING JOB {job} USING '
     gsql += ', '.join([f'file_{name}=\\"ANY:{data_dir}/dynamic/{name}/{batch_dir}\\"' for name in names])
@@ -87,7 +86,7 @@ def run_batch_update(batch_date, args):
     else:
         subprocess.run(f'gsql -g ldbc_snb RUN LOADING JOB load_root_post', shell=True)
     print(f'Precompute_root_post:\t{time.time()-t1:.4f} s')
-    
+
     print("## Deletes")
     t1 = time.time()
     for vertex in VERTICES:
